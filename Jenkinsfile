@@ -18,8 +18,8 @@ pipeline {
     stage('Push to ECR') {
       steps {
         sh '''
-        docker tag my-app:latest <ECR-URL>:latest
-        docker push <ECR-URL>:latest
+        docker tag my-app:latest 116099576093.dkr.ecr.us-west-2.amazonaws.com/my-app:latest
+        docker push 116099576093.dkr.ecr.us-west-2.amazonaws.com/my-app:latest
         '''
       }
     }
@@ -29,6 +29,3 @@ pipeline {
         sh 'kubectl apply -f deployment.yaml'
       }
     }
-
-  }
-}

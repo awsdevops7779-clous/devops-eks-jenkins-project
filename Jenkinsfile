@@ -15,6 +15,14 @@ pipeline {
       }
     }
 
+    stage('Login to ECR') {
+      steps {
+        sh '''
+        aws ecr get-login-password --region us-west-2 | docker login --username AWS --password-stdin 116099576093.dkr.ecr.us-west-2.amazonaws.com
+        '''
+      }
+    }
+
     stage('Push to ECR') {
       steps {
         sh '''
@@ -26,6 +34,10 @@ pipeline {
 
     stage('Deploy to EKS') {
       steps {
-        sh 'kubectl apply -f deployment.yaml'
+        sh 'kubectl apply -f k8s/deployment.yaml'
+        sh 'kubectl apply -f k8s/service.yaml'
       }
     }
+
+  }
+}

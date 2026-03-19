@@ -1,6 +1,6 @@
 const http = require('http');
 
 http.createServer((req, res) => {
-  res.write("Updated via Jenkins Pipeline");
+  res.write("Hello from devops-eks-jenkins-project!");
   res.end();
 }).listen(3000);
